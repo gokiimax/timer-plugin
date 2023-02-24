@@ -1,0 +1,11 @@
+timer:
+  paused: "&6&o¡El temporizador está en pausa!"
+  pause: "El temporizador fue &cpausado."
+  pauseTitle: "&7Temporizador &cen pausa"
+  reset: "¡El temporizador se ha reiniciado!"
+  resume: "El temporizador &acontinuó."
+  resumeTitle: "&7Temporizador &acontinuación"
+  running: "&cEl temporizador ya se está ejecutando."
+  nRunning: "&cEl temporizador no está funcionando."
+  time: "¡La hora se ha establecido en %time%!"
+  NAN: "¡&c%string% no es hora!"

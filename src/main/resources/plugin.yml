@@ -1,0 +1,8 @@
+name: Timer
+author: gokimax
+version: 1.0
+main: dev.max.timer.Main
+
+commands:
+  timer:
+    permission: timer.command.timer

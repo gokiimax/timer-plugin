@@ -1,0 +1,11 @@
+timer:
+  paused: "&6&oDer Timer ist pausiert!"
+  pause: "Der Timer wurde &cpausiert."
+  pauseTitle: "&7Timer &cpausiert"
+  reset: "Der Timer wurde zurückgesetzt!"
+  resume: "Der Timer wurde &afortgesetzt."
+  resumeTitle: "&7Timer &afortgesetzt"
+  running: "&cDer Timer läuft bereits."
+  nRunning: "&cDer Timer läuft nicht."
+  time: "Die Zeit wurde auf %time% gesetzt!"
+  NAN: "&c%string% ist keine Zeit!"

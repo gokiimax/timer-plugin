@@ -1,0 +1,5 @@
+dev\max\timer\commands\TimerCommand.class
+dev\max\timer\timer\Timer.class
+dev\max\timer\utils\Config.class
+dev\max\timer\Main.class
+dev\max\timer\timer\Timer$1.class
