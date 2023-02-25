@@ -2,7 +2,12 @@ package dev.max.timer.language;
 
 public enum SupportedLanguages {
 
-    ENGLISH("en"), GERMAN("de"), SPANISH("es"), FRENCH("fr");
+    ENGLISH("en"),
+    GERMAN("de"),
+    SPANISH("es"),
+    FRENCH("fr"),
+    PORTUGUESE("pt"),
+    RUSSIAN("ru");
 
     public String lang;
 
@@ -18,7 +23,4 @@ public enum SupportedLanguages {
         this.lang = lang;
     }
 
-    public static SupportedLanguages getLanguageFromName(String name) {
-        return SupportedLanguages.valueOf(name);
-    }
 }

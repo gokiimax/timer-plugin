@@ -2,6 +2,7 @@ package dev.max.timer.commands;
 
 import com.google.gson.internal.LazilyParsedNumber;
 import dev.max.timer.Main;
+import dev.max.timer.gui.TimerGui;
 import dev.max.timer.language.LanguageHelper;
 import dev.max.timer.language.SupportedLanguages;
 import dev.max.timer.timer.Timer;
@@ -26,6 +27,11 @@ public class TimerCommand implements CommandExecutor {
         Player player = (Player) sender;
 
         switch (args[0].toLowerCase()) {
+            case "gui": {
+                TimerGui gui = new TimerGui(player);
+                gui.openGui();
+                break;
+            }
             case "setlang": {
 
                 if(args.length != 2) {
@@ -33,26 +39,23 @@ public class TimerCommand implements CommandExecutor {
                     return true;
                 }
 
-                SupportedLanguages language = SupportedLanguages.ENGLISH;
-                for(SupportedLanguages lang : SupportedLanguages.values()) {
-                    if(args[1].contains(lang.getLang())){
-                        language = lang;
-                        break;
-                    }
-                }
+                LanguageHelper.updateLanguage(main, args[1].toLowerCase());
 
-                LanguageHelper.updateLanguage(main, language.getLang());
+                for(SupportedLanguages lang : LanguageHelper.getCurrentLanguage().values()) {
+                    player.sendMessage(main.getTimer().getPrefix() + "Updated Language to§8: §9" + lang.name());
+                }
                 break;
             }
             case "resume": {
                 Timer timer = Main.getInstance().getTimer();
 
-                player.sendTitle(LanguageHelper.getMessage(main, "timer.resumeTitle"), "", 1*20, 2*20, 1*20);
 
                 if(timer.isRunning()) {
                     sender.sendMessage(timer.getPrefix() + LanguageHelper.getMessage(main, "timer.running"));
                     break;
                 }
+
+                player.sendTitle(LanguageHelper.getMessage(main, "timer.resumeTitle"), "", 1*20, 2*20, 1*20);
 
                 timer.setRunning(true);
                 sender.sendMessage(timer.getPrefix() + LanguageHelper.getMessage(main, "timer.resume"));
@@ -62,12 +65,13 @@ public class TimerCommand implements CommandExecutor {
                 Timer timer = Main.getInstance().getTimer();
                 FileConfiguration timerConfig = Main.getInstance().getTimerConfig().toFileConfiguration();
 
-                player.sendTitle(LanguageHelper.getMessage(main, "timer.pauseTitle"), "", 1*20, 2*20, 1*20);
 
                 if (!timer.isRunning()) {
                     sender.sendMessage(timer.getPrefix() + LanguageHelper.getMessage(main, "timer.nRunning"));
                     break;
                 }
+
+                player.sendTitle(LanguageHelper.getMessage(main, "timer.pauseTitle"), "", 1*20, 2*20, 1*20);
 
                 timerConfig.set("time", timer.getHours() + ":" + timer.getMinutes() + ":" + timer.getSeconds());
                 Main.getInstance().getTimerConfig().save();
@@ -129,6 +133,7 @@ public class TimerCommand implements CommandExecutor {
         sender.sendMessage("§7═§8═§7═§8═§7═§8═§7═§8═§7═§8═§7═ §dTimer §8(§71§8/§71§8) §7═§8═§7═§8═§7═§8═§7═§8═§7═§8═§7═");
         sender.sendMessage("§7Use /timer to get this page");
         sender.sendMessage("\n");
+        sender.sendMessage("§8» §d/timer gui: §7Open the timer gui");
         sender.sendMessage("§8» §d/timer resume: §7Resume the timer");
         sender.sendMessage("§8» §d/timer pause: §7Pause the timer");
         sender.sendMessage("§8» §d/timer reset: §7Reset the timer");

@@ -2,6 +2,7 @@ package dev.max.timer;
 
 import dev.max.timer.commands.TimerCommand;
 import dev.max.timer.language.LanguageHelper;
+import dev.max.timer.listeners.InventoryClickEventListener;
 import dev.max.timer.timer.Timer;
 import dev.max.timer.utils.Config;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -45,6 +46,7 @@ public class Main extends JavaPlugin {
         timerConfig.toFileConfiguration().options().copyDefaults(true);
         timerConfig.save();
 
+        getServer().getPluginManager().registerEvents(new InventoryClickEventListener(), this);
     }
 
     public static Main getInstance() {

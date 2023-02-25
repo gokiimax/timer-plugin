@@ -70,13 +70,15 @@ public class LanguageHelper implements Listener {
         main.getConfig().set("plugin.language", language);
         main.saveConfig();
         languagesHashMap.clear();
+
+        SupportedLanguages language1 = SupportedLanguages.ENGLISH;
         for (SupportedLanguages lang : SupportedLanguages.values()) {
-            if(lang.lang == language) {
-                languagesHashMap.put(main.getConfig().getString("plugin.language"), lang);
-            } else {
-                languagesHashMap.put(main.getConfig().getString("plugin.language"), SupportedLanguages.ENGLISH);
+            if(language.equalsIgnoreCase(lang.getLang())) {
+                language1 = lang;
+                break;
             }
         }
+        languagesHashMap.put(main.getConfig().getString("plugin.language"), language1);
     }
 
     public static String getMessage(SupportedLanguages language, String messageKey)
@@ -84,4 +86,7 @@ public class LanguageHelper implements Listener {
         return ChatColor.translateAlternateColorCodes('&', languageContent.get(language).get(messageKey).toString());
     }
 
+    public static HashMap<String, SupportedLanguages> getCurrentLanguage() {
+        return languagesHashMap;
+    }
 }
